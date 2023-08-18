@@ -76,54 +76,46 @@ values
 ('BMSM3', 'Cooking with me', 'Funbook', 5.99, 'yes', 'Nallini', 'J&J Books'),
 ('BMSM4', 'Manasikarogi', 'Noval', 7.99, 'no', 'Raman Oolanpra', 'Odayil Publisher'),
 ('BMSM5', 'One dream', 'Autobiograpy', 13.99, 'yes', 'Willam sha', 'DMK Publisher');
+select book_title ,category,rental_price from books where status ='yes';
 
-/*1.
-select Book_title,Category,Rental_price from Books where Status = 'Yes';
+select emp_name,salary from employee order by salary desc;
 
-/*2. 
-select Emp_name,Salary from Employee order by Salary desc;
+select b.book_title,c.customer_name
+from issuestatus i
+join books b on i. isbn_book = b.isbn
+join customer c on i.issued_cust= c.customer_id;
 
-/*3. 
-select b.Book_title, c.Customer_name
-from IssueStatus i
-join Books b on i.BMSM_book = b.BMSM
-join Customer c on i.Issued_cust = c.Customer_Id;
+select category,count(*)as book_count
+from books
+group by category;
 
-/4. 
-select category, count(*) as book_count
-from Books
-group by Category;
+select emp_name,position from employee
+where salary > 50000;
 
-/*5. 
-select Emp_name,position from Employee
-where Salary > 50000;
+select customer_name from customer
+where reg_date<'2022-01-01'
+and customer_id not in (select issued_cust from issuestatus);
 
-/*6. 
-select Customer_name from Customer
-where Reg_date<'2022-01-01'
-and Customer_id not in (select Issued_cust from IssueStatus); 
+select b.branch_no ,count(*) as total_count
+from employee e
+join branch b on e.emp_id = b.manager_id = e.emp_id
+group by b.branch_no;
+
+select c.customer_name from customer c 
+join issuestatus i on c.customer_id = i.issued_cust
+where i.issue_date >='2023-06-01' and i.issue_date < '2023-07-01';
+
+select book_title from books where category = 'history';
+
+select b.branch_no,count(*) as empolyee_count
+from employee e
+join branch b  on e.emp_id = b.manager_id
+group by b.branch_no
+having empolyee_count > 5;
 
 
-/*7. 
-select b.Branch_no,count(*) as Total_count
-from Employee e
-join Branch b on e.Emp_id =b.Manager_id
-group by b.Branch_no;
 
-/*8. 
-select c.Customer_name 
-from Customer c 
-join IssueStatus i on c.Customer_Id = i.Issued_cust
-where month(i.Issue_date) =6 and year(i.Issue_date) =2023; 
 
-/9. 
-select Book_title
-from Books
-where Category = 'history';
 
-/*10.
-select b.Branch_no,count(*)as Employee_count
-from Employee e
-join Branch b on e.Emp_id = b.Manager_id
-group by b.Branch_no
-Having Employee_Count > 5;
+
+
